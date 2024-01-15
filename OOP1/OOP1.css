@@ -1,0 +1,33 @@
+
+    #volvo_car,
+    #bmw_car,
+    #toyota_car,
+    #ferrari_car {
+        width: 50px; 
+        height: auto; 
+        display: block;
+        margin: 10px 0; 
+    }
+
+
+    #speed_cars {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    #speed_cars li {
+        display: inline-block;
+        margin-right: 20px; /* Adjust margin as needed for spacing */
+    }
+    
+    .speed_value {
+        display: inline-block;
+        margin-left: 5px; /* Adjust margin as needed for spacing */
+    }
+    
+    img {
+        width: 150px; /* Adjust the width as needed for your images */
+        height: auto; /* Maintain aspect ratio */
+        display: block;
+        margin: 10px 0; /* Add some margin between images */
+    }

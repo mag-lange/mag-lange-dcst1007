@@ -1,4 +1,25 @@
 //Code for OOP1.html
+//global variables
+let x = 0
+setInterval(() => {
+    x = x%4
+    let speed = cars[x].speed
+    switch (x) {
+        case 0:
+            document.getElementById("speed_volvo").innerHTML = speed
+            break;
+        case 1:
+            document.getElementById("speed_bmw").innerHTML = speed
+            break;
+        case 2:
+            document.getElementById("speed_toyota").innerHTML = speed
+            break;
+        case 3:
+            document.getElementById("speed_ferrari").innerHTML = speed
+            break;
+    }
+    x++
+},100)
 class Car {
     constructor(registration, brand, yearModel, speed, max_speed) {
         this.registration = registration
@@ -10,11 +31,19 @@ class Car {
     accelerate() {
         console.log("accelerating " + this.brand +"..." )
         this.speed = this.speed + 10
+        if(this.speed >= this.max_speed) {
+            this.speed = this.max_speed
+            return this.speed
+        }
         return this.speed
     }
     brake() {
         console.log("braking..."+ this.brand +"..." )
         this.speed = this.speed - 10
+        if (this.speed < 0) {
+            this.speed = 0
+            return this.speed
+        }
         return this.speed
     }
 }
