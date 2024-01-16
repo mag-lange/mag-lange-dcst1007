@@ -42,8 +42,8 @@ let bmw_img = document.getElementById("bmw_car")
 let toyota_img = document.getElementById("toyota_car")
 let ferrari_img = document.getElementById("ferrari_car")
 
-setInterval(() => {
-    x = x%4
+setInterval(() => { //This interval code is crazy inefficient, and I used several hours trying to get this all into a single function
+    x = x%4 //but I had to give up eventually and went to something that hurts my eyes (copying almost identical code 4 times)
     let speed = cars[x].speed
     switch (x) {
         case 0:
@@ -120,6 +120,13 @@ brake_button.onclick = () => {
     let selectedCar = cars[carSelection.value]; // A bit complex, but I did not find any better solution
     selectedCar.brake();
 }
+
+//To improve 
+
+//Get the images into the objects so no functions are used, only methods 
+//Combine the 4 moving functions into one function 
+//Make the pictures reverse when they change direction
+//In general just cut down time on code, write the same program with fewer lines.
 
 
 
