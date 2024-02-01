@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <canvas id="canvas" height="400" width="600"></canvas>
-<script>
 class Boble {
     constructor(x,y,r) {
       this.x = x;
       this.y = y;
       this.r = r;
-      this.farge = "green";
+      this.farge = this.random_farge()
     }
     flytt() {
       this.x = this.x + Math.floor(Math.random() * 10 -5);
       this.y = this.y + Math.floor(Math.random() * 10 -5);
+    }
+    random_farge() {
+        let red = Math.floor(Math.random()*255);
+        let green = Math.floor(Math.random()*255);
+        let blue = Math.floor(Math.random()*255);
+        return "RGB(" + red + "," + green + "," + blue + ")"
+
     }
     vis() {
       ctx.beginPath();
@@ -38,6 +35,16 @@ class Boble {
         return false;
       }
     }
+    kant_sjekk() {
+        if (this.x >= canvas.width || this.y >= canvas.height) {
+            this.x -= 20
+            this.y -= 20
+        }
+        else if (this.x <= 0 || this.y <= 0) {
+            this.x += 20
+            this.y += 20
+        }
+    }
   }
 
   var canvas = document.getElementById("canvas");
@@ -56,13 +63,20 @@ class Boble {
 
 
   setInterval(tegn,100);
+  setInterval(ny_boble, 1000)
+
+  function ny_boble() {
+    bobler.push(new Boble(Math.floor(Math.random() * canvas.width),Math.floor(Math.random() * canvas.height),Math.floor(Math.random() * 40 + 10)))
+  }
 
   function tegn() {
     reset();
     for(let i = 0; i < bobler.length; i++) {
       bobler[i].flytt();
       bobler[i].vis();
+      bobler[i].kant_sjekk();
     }
+    
   }
 
   function reset() {
@@ -90,12 +104,9 @@ class Boble {
   function musbeveg(event) {
     for(let i = 0; i < bobler.length; i++) {
     if(bobler[i].inneholder(event.x,event.y)) {
-        bobler[i].farge = "red";
+        bobler[i].farge = "white";
     } else {
-        bobler[i].farge = "green";
+        bobler[i].farge = this.farge;
         }
     }
 }
-</script>
-</body>
-</html>
