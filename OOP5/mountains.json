@@ -1,0 +1,17 @@
+{
+  
+  "fjelltopper":[
+    {"fylke":"Viken", "name":"Folarskardnuten", "elevation":"1933"},
+    {"fylke":"Innlandet", "name":"Galdhopiggen", "elevation":"2469"},
+    {"fylke":"Vestfold og Telemark", "name":"Gaustatoppen", "elevation":"1883"},
+    {"fylke":"Troms og Finnmark", "name":"Jiehkkevarri", "elevation":"1834"},
+    {"fylke":"Oslo", "name":"Kjerkeberget", "elevation":"630"},
+    {"fylke":"Nordland", "name":"Oksskolten", "elevation":"1915"},
+    {"fylke":"More og Romsdal", "name":"Pyttegga", "elevation":"1999"},
+    {"fylke":"Vestland", "name":"Store Skagastolstiden", "elevation":"2405"},
+    {"fylke":"Tronderlag", "name":"Storskrymten", "elevation":"1985"},
+    {"fylke":"Agder", "name":"Saebyggjenuten", "elevation":"1507"},
+    {"fylke":"Rogaland", "name":"Vassdalseggi", "elevation":"1658"}
+  ]
+}
+  
