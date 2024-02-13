@@ -1,12 +1,19 @@
 table {
-    width: 100%;
+    width: 70%;
     border-collapse: collapse;
   }
   th, td {
-    padding: 15px;
+    padding: 5px;
     text-align: left;
-    border-bottom: 5px solid #ddd;
+    border-bottom: 7px solid #ddd;
   }
   th {
     background-color: #f2f2f2;
+  }
+  #map {
+    position: absolute;
+    left: 650px;
+    top: 80px;
+    height: 250px;
+    width: 250px;
   }

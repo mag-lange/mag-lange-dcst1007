@@ -1,24 +1,35 @@
-//Script file for OOP5.html and using the JSON file mountains.json
-//I hardcoded the json file, maybe not the best idea
+//Script file for OOP5 
+//Several sources were used including GeeksforGeeks, W3Schools and lefletjs.com
+//ChatGPT was used for the formatting (CSS) of the table as well as fixing issues related to the markers
+//This is probably the coolest program I have ever made 
+fetch('mountains.json')
+  .then(response => response.json())
+  .then(data => {
+    data.fjelltopper.sort((a, b) => b.elevation - a.elevation);
+    const mountainsTable = document.getElementById('mountainsTable');
+    const tbody = mountainsTable.querySelector('tbody');
 
-  fetch('mountains.json')
-    .then(response => response.json())
-    .then(data => {
-      data.fjelltopper.sort((a, b) => b.elevation - a.elevation) //Sort in descending order
-      //I took this smart method from https://www.w3schools.com/js/js_array_sort.asp 
-      const mountainsTable = document.getElementById('mountainsTable');
-      const tbody = mountainsTable.querySelector('tbody');
-      data.fjelltopper.forEach(mountain => { //Syntax learned in DCST1005 for powershell
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${mountain.fylke}</td>
-          <td>${mountain.name}</td>
-          <td>${mountain.elevation}</td>
-        `; //Using the new method used in the previous lecture with `. 
-        tbody.appendChild(row);
-      });
-    })
-    .catch(error => {
-      console.error('Error fetching JSON:', error);
+    data.fjelltopper.forEach(mountain => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${mountain.fylke}</td>
+        <td>${mountain.name}</td>
+        <td>${mountain.elevation}</td>
+      `;
+      tbody.appendChild(row);
     });
+    //Now for the map part, mostly code copied/modified from leafletjs.com
+    const map = L.map('map').setView([61.92411, 8.02015], 6); //Default settings
 
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    data.fjelltopper.forEach(mountain => {
+      const marker = L.marker([parseFloat(mountain.x), parseFloat(mountain.y)]).addTo(map);
+      marker.bindPopup(`<b>${mountain.name}</b><br>Elevation: ${mountain.elevation}m`);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching JSON:', error);
+  });
