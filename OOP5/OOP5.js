@@ -18,8 +18,8 @@ fetch('mountains.json')
       `;
       tbody.appendChild(row);
     });
-    //Now for the map part, mostly code copied/modified from leafletjs.com
-    const map = L.map('map').setView([61.92411, 8.02015], 6); //Default settings
+    //Now for the map part, mostly code copied/modified from leafletjs.com + some mr. GPT
+    const map = L.map('map').setView([61.92411, 8.02015], 6); //Default viewpoint, in the middle of Norway
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -28,8 +28,8 @@ fetch('mountains.json')
     data.fjelltopper.forEach(mountain => {
       const marker = L.marker([parseFloat(mountain.x), parseFloat(mountain.y)]).addTo(map);
       marker.bindPopup(`<b>${mountain.name}</b><br>Elevation: ${mountain.elevation}m`);
-    });
+    }); //bindPopup makes them dynamic so you can press them and see their name and elevation
   })
   .catch(error => {
-    console.error('Error fetching JSON:', error);
+    console.error('Error fetching JSON:', error); //This will never execute, but nice for larger webpages where json files are not stored locally
   });
