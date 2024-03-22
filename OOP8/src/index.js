@@ -7,7 +7,7 @@ import { createHashHistory } from 'history';
 
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
-class Menu extends Component {
+class Menu extends Component { 
   render() {
     return (
       <div>
@@ -60,7 +60,7 @@ class StudentEdit extends Component {
     return (
       <div>
         Name:{' '}
-        <input
+        <input //Can also use <textarea> instead
           type="text"
           value={this.student.name}
           onChange={(event) => (this.student.name = event.currentTarget.value)}
