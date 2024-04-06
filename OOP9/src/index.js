@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Component } from 'react-simplified';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { studentService } from './services';
+import { studentService, showcourses } from './services';
 import { Alert, Card, Row, Column, NavBar, Button, Form } from './widgets';
 import { createHashHistory } from 'history';
 
@@ -13,6 +13,7 @@ class Menu extends Component {
     return (
       <NavBar brand="StudAdm">
         <NavBar.Link to="/students">Students</NavBar.Link>
+        <NavBar.Link to="/courses"> Courses</NavBar.Link>
       </NavBar>
     );
   }
@@ -65,6 +66,10 @@ class StudentDetails extends Component {
             <Column width={2}>Email:</Column>
             <Column>{this.student.email}</Column>
           </Row>
+          <Row>
+            <Column width={2}>Course:</Column>
+            <Column>{this.student.course_id}</Column>
+          </Row>
         </Card>
         <Button.Light onClick={this.edit}>Edit</Button.Light>
       </div>
@@ -72,11 +77,14 @@ class StudentDetails extends Component {
   }
 
   mounted() {
-    studentService.getStudent(this.props.match.params.id, (student) => {
+    studentService.getStudents(this.props.match.params.id, (student) => {
       this.student = student;
     });
-  }
 
+    studentService.getCourseStudent(this.props.match.params.id, (student) => {
+      this.course_name = this.course_name;
+    });
+  }
   edit() {
     history.push('/students/' + this.student.id + '/edit');
   }
@@ -134,6 +142,33 @@ class StudentEdit extends Component {
   }
 }
 
+class ShowCourses extends Component {
+  courses = []
+  render() {
+    return (
+      <div>
+
+        <Card title="Courses-Overview">
+        {this.courses.map((course) => (
+          <Row key={course.course_id}>
+            <Column>
+              <NavLink to={'/courses/' + course.course_id}>{course.course_name}</NavLink>
+            </Column>
+            
+          </Row>
+        ))}
+        </Card>
+      </div>
+    );
+  }
+  mounted() {
+    console.log("Getting courses")
+    showcourses.getCourses((courses) => {
+      this.courses = courses;
+    });
+  }
+}
+
 createRoot(document.getElementById('root')).render(
   <div>
     <Alert />
@@ -143,6 +178,7 @@ createRoot(document.getElementById('root')).render(
       <Route exact path="/students" component={StudentList} />
       <Route exact path="/students/:id" component={StudentDetails} />
       <Route exact path="/students/:id/edit" component={StudentEdit} />
+      <Route exact path="/courses" component={ShowCourses} />
     </HashRouter>
   </div>,
 );

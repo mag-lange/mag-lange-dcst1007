@@ -1,5 +1,5 @@
 import { pool } from './mysql-pool';
-
+//-----------------------------------------------------------------------------------------------
 class StudentService {
   getStudents(success) {
     pool.query('SELECT * FROM Students', (error, results) => {
@@ -8,15 +8,7 @@ class StudentService {
       success(results);
     });
   }
-
-  getStudent(id, success) {
-    pool.query('SELECT * FROM Students WHERE id=?', [id], (error, results) => {
-      if (error) return console.error(error);
-
-      success(results[0]);
-    });
-  }
-
+  
   updateStudent(student, success) {
     pool.query(
       'UPDATE Students SET name=?, email=? WHERE id=?',
@@ -30,3 +22,17 @@ class StudentService {
   }
 }
 export let studentService = new StudentService();
+
+//---------------------------------------------------------------------------
+//Group work (connected to course)
+class ShowCourses{
+  getCourses(success) {
+    console.log("GetCourses Method was called, attempting to get courses")
+    pool.query('SELECT * FROM study_program', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+}
+export let showcourses = new ShowCourses();

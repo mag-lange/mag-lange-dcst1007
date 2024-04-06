@@ -103,7 +103,6 @@ export class Button {
 /**
  * Renders a NavBar link using Bootstrap styles.
  *
- * Properties: to
  */
 class NavBarLink extends Component {
   render() {
