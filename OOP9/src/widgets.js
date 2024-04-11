@@ -1,3 +1,5 @@
+
+
 import * as React from 'react';
 import { Component } from 'react-simplified';
 import { NavLink } from 'react-router-dom';
@@ -103,6 +105,7 @@ export class Button {
 /**
  * Renders a NavBar link using Bootstrap styles.
  *
+ * Properties: to
  */
 class NavBarLink extends Component {
   render() {
@@ -166,11 +169,48 @@ class FormInput extends Component {
 }
 
 /**
+ * Renders a form selection using Bootstrap styles
+ *
+ * Properties: type, rows, cols, value, onChange, required
+ */
+class FormTextArea extends Component {
+  render() {
+    return (
+      <textarea
+        className="form-control"
+        rows={this.props.rows}
+        cols={this.props.cols}
+        value={this.props.value}
+        onChange={this.props.onChange}
+        required={this.props.required}
+      />
+    );
+  }
+}
+
+/**
+ * Renders a form selection using Bootstrap styles
+ *
+ * Properties: value, onChange
+ */
+class FormSelect extends Component {
+  render() {
+    return (
+      <select className="form-select" value={this.props.value} onChange={this.props.onChange}>
+        {this.props.children}
+      </select>
+    );
+  }
+}
+
+/**
  * Renders form components using Bootstrap styles.
  */
 export class Form {
   static Label = FormLabel;
   static Input = FormInput;
+  static TextArea = FormTextArea;
+  static Select = FormSelect;
 }
 
 /**
@@ -247,3 +287,5 @@ export class Alert extends Component {
     });
   }
 }
+
+
